@@ -1,0 +1,34 @@
+inherit: null
+
+visual_frontend:
+  backbone: conv3d-resnet34-ds16
+  relu_type: swish # relu, prelu, swish
+  image_size: 160
+  feat_size: 10
+  feat_channel: 256
+  ratio: 0.2 # ratio used in symmetric face embedding
+
+chinese_extractor:
+  node_dim: 384
+  edge_dim: 32
+  eheads: 8
+  elayers: 12
+  pgru_scale: 4
+  dropout_rate: 0.1
+  attn_drop_rate: 0.1
+  tv_local_width: 15  # width of the local mask of tv
+  macaron_style: true
+
+  # pga
+  pga_node_dim: 512
+  # decoder
+  dheads: 8
+  dlayers: 6
+  dlinear_units: 2048
+  # others
+  lsm_weight: 0.1  # label smooth
+  transformer_length_normalized_loss: false
+  mtlalpha: 0.1  # ctc loss weight
+  ctc_type: builtin
+  # inference
+  test_ctc_weight: 0.1

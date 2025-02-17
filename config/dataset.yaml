@@ -1,0 +1,24 @@
+inherit: null
+
+name: lrs2-face
+
+train: ./LipReading_dataset/lrs2/train
+val: ./LipReading_dataset/lrs2/val
+test: ./LipReading_dataset/lrs2/test
+
+tokenizer:
+  name: spm
+  model: ./tokenizer/en/{mode}.model
+  dict: ./tokenizer/en/{mode}.txt
+
+decode:
+  test_beam_size: 40
+  tta: true
+  lm_weight: 0.3
+  length_bonus: 0.3
+  rnn_lm: ./language_model/lm_en_autoavsr_unigram5000/model.pth
+  rnn_lm_conf: ./language_model/lm_en_autoavsr_unigram5000/model.json
+  llm_path: ./Phi-3-mini-4k-instruct
+  llm_largest_texts_length: 100
+  llm_weight: 0.2
+  llm_length_bonus: 0.1

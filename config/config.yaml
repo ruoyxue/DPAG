@@ -1,0 +1,35 @@
+inherit: null
+
+data:
+  dataset_cfg: ./config/dataset.yaml
+  tokenizer: subword_en
+  convert_to_gray: false
+  max_frames: 1700
+  test_max_length: 1000
+  need_test: true
+  crop_size: 160
+
+trainer:
+  precision: 32
+  max_epochs: 10
+  num_nodes: 1
+  accelerator: "gpu"
+  devices: -1
+  benchmark: false
+  sync_batchnorm: true
+  deterministic: false
+  num_sanity_val_steps: 2
+  limit_val_batches: 1.0
+  check_val_every_n_epoch: 1
+  accumulate_grad_batches: 5
+  reload_dataloaders_every_n_epochs: 1
+  gradient_clip_val: 5.0
+  replace_sampler_ddp: false
+
+model_cfg: ./config/model.yaml
+
+seed: 42
+num_workers: 4
+prefetch_factor: 2
+
+exp_dir: ./LipReading_exp/lrs2/dpag
