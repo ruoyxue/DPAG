@@ -32,11 +32,8 @@ def main():
     cfg.ckpt_path = args.ckpt
     cfg.mode = args.mode
 
-    # Configure logger
-    logger = TensorBoardLogger(save_dir=os.path.join(cfg.exp_path, 'tblog'))
-
     # Set modules and trainer
-    modelmodule = ModelModule(cfg, ckpt=cfg.ckpt_path)
+    modelmodule = ModelModule(cfg, ckpt=cfg.ckpt_path if cfg.ckpt_path != "" else None)
     datamodule = DataModule(cfg)
     trainer = Trainer(**cfg.trainer)
     seed_everything(cfg.seed + trainer.local_rank, workers=True)
